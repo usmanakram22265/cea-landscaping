@@ -130,6 +130,7 @@ export function WorkGallery() {
                 width={800}
                 height={600}
                 sizes="(max-width: 640px) 45vw, 30vw"
+          quality={60}
                 className="h-auto w-full transition-transform duration-700 ease-[var(--ease-out-soft)] group-hover:scale-[1.04]"
               />
               <span
@@ -227,6 +228,7 @@ export function WorkGallery() {
                 width={1600}
                 height={1200}
                 sizes="100vw"
+          quality={70}
                 className="mx-auto max-h-[80vh] w-auto rounded-2xl object-contain shadow-float"
               />
               <figcaption className="mx-auto mt-4 flex max-w-2xl items-center justify-center gap-3 text-center text-sm text-white/80">

@@ -49,6 +49,7 @@ export function QuoteForm() {
                 aria-hidden
                 fill
                 sizes="(max-width: 1024px) 100vw, 35vw"
+          quality={65}
                 className="object-cover"
               />
               <div

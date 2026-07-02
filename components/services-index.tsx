@@ -176,6 +176,7 @@ export function ServicesIndex() {
                         alt={current.imageAlt}
                         fill
                         sizes="(max-width: 1024px) 0px, 45vw"
+          quality={65}
                         className="object-cover"
                       />
                     </motion.div>
@@ -217,6 +218,7 @@ export function ServicesIndex() {
                   alt={service.imageAlt}
                   fill
                   sizes="(max-width: 640px) 90vw, 45vw"
+          quality={65}
                   className="object-cover"
                 />
                 <span className="absolute bottom-3 left-3 inline-flex items-center rounded-full bg-white/92 px-2.5 py-1 text-[0.7rem] font-semibold text-ink">

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   motion,
   useReducedMotion,
@@ -27,6 +27,22 @@ export function Hero() {
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
   const cueOpacity = useTransform(scrollYProgress, [0, 0.18], [1, 0]);
 
+  // Keep the full-quality video off the critical path: the poster paints
+  // immediately as the LCP, and the 2.4MB video only starts downloading
+  // after the page load event, fading in once it can play.
+  const [mountVideo, setMountVideo] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
+  useEffect(() => {
+    if (reduce) return;
+    const start = () => setMountVideo(true);
+    if (document.readyState === "complete") {
+      start();
+      return;
+    }
+    window.addEventListener("load", start, { once: true });
+    return () => window.removeEventListener("load", start);
+  }, [reduce]);
+
   return (
     <section
       id="top"
@@ -38,24 +54,27 @@ export function Hero() {
         style={{ y: reduce ? 0 : imageY, scale: reduce ? 1 : scale }}
         className="absolute inset-0 z-0"
       >
-        {reduce ? (
-          <Image
-            src="/videos/hero-poster.jpg"
-            alt="Manicured commercial landscaping and lawn at a modern Houston property"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-[center_60%] [filter:saturate(1.12)_contrast(1.06)]"
-          />
-        ) : (
+        <Image
+          src="/videos/hero-poster.jpg"
+          alt="Manicured commercial landscaping and lawn at a modern Houston property"
+          fill
+          priority
+          quality={70}
+          sizes="100vw"
+          className="object-cover object-[center_60%] [filter:saturate(1.12)_contrast(1.06)]"
+        />
+        {mountVideo && (
           <video
-            className="size-full object-cover object-[center_60%] [filter:saturate(1.12)_contrast(1.06)]"
+            className={`absolute inset-0 size-full object-cover object-[center_60%] transition-opacity duration-700 [filter:saturate(1.12)_contrast(1.06)] ${
+              videoReady ? "opacity-100" : "opacity-0"
+            }`}
             autoPlay
             loop
             muted
             playsInline
             poster="/videos/hero-poster.jpg"
             aria-hidden
+            onCanPlay={() => setVideoReady(true)}
           >
             <source src="/videos/hero.mp4" type="video/mp4" />
           </video>

@@ -81,6 +81,7 @@ export function WhyProof() {
                 aria-hidden
                 fill
                 sizes="(max-width: 1024px) 100vw, 640px"
+          quality={65}
                 className="object-cover transition-transform duration-[1.2s] ease-[var(--ease-out-soft)] group-hover:scale-[1.05]"
               />
               <div

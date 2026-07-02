@@ -18,6 +18,7 @@ export function SiteFooter() {
           aria-hidden
           fill
           sizes="100vw"
+          quality={60}
           className="object-cover opacity-25"
         />
         <div

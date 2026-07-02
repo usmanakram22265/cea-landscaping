@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.join(__dirname),
   },
+  images: {
+    // lower-quality tiers used for decorative/large imagery to cut bytes
+    qualities: [60, 65, 70, 75],
+  },
 };
 
 export default nextConfig;
