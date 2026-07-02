@@ -46,6 +46,7 @@ export function SiteHeader() {
           >
             <Image
               src="/logo.webp"
+              sizes="160px"
               alt={business.name}
               width={1500}
               height={599}
@@ -140,6 +141,7 @@ export function SiteHeader() {
               <div className="flex items-center justify-between">
                 <Image
                   src="/logo.webp"
+                  sizes="160px"
                   alt={business.name}
                   width={1500}
                   height={599}

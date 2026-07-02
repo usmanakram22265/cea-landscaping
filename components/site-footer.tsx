@@ -51,6 +51,7 @@ export function SiteFooter() {
           <div className="max-w-xs">
             <Image
               src="/logo.webp"
+              sizes="160px"
               alt={business.name}
               width={1500}
               height={599}
