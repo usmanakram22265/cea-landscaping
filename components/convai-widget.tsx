@@ -79,12 +79,27 @@ function injectShadowStyle() {
 
 export function ConvaiWidget() {
   useEffect(() => {
-    let tries = 0;
-    const timer = window.setInterval(() => {
-      tries += 1;
-      if (injectShadowStyle() || tries > 60) window.clearInterval(timer);
-    }, 500);
-    return () => window.clearInterval(timer);
+    // Poll until the injection actually lands. No time cap: on slow
+    // connections the lazy 1.4MB widget script can take well over 30s to
+    // arrive, and giving up early leaks the stock launcher (orb + card).
+    // The poll stops the moment the style is in place.
+    let stop = false;
+    let timer = 0;
+    const tick = () => {
+      if (stop) return;
+      if (!injectShadowStyle()) timer = window.setTimeout(tick, 500);
+    };
+    tick();
+    // also re-arm as soon as the custom element upgrades, in case the
+    // shadow root appears between polls
+    customElements
+      .whenDefined("elevenlabs-convai")
+      .then(() => !stop && tick())
+      .catch(() => {});
+    return () => {
+      stop = true;
+      window.clearTimeout(timer);
+    };
   }, []);
 
   return (
