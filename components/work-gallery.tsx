@@ -129,8 +129,10 @@ export function WorkGallery() {
                 alt={img.alt}
                 width={800}
                 height={600}
-                sizes="(max-width: 640px) 45vw, 30vw"
-          quality={60}
+                sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 270px"
+                quality={50}
+                placeholder="blur"
+                blurDataURL={img.blur}
                 className="h-auto w-full transition-transform duration-700 ease-[var(--ease-out-soft)] group-hover:scale-[1.04]"
               />
               <span
@@ -228,7 +230,9 @@ export function WorkGallery() {
                 width={1600}
                 height={1200}
                 sizes="100vw"
-          quality={70}
+                quality={70}
+                placeholder="blur"
+                blurDataURL={filtered[active].blur}
                 className="mx-auto max-h-[80vh] w-auto rounded-2xl object-contain shadow-float"
               />
               <figcaption className="mx-auto mt-4 flex max-w-2xl items-center justify-center gap-3 text-center text-sm text-white/80">

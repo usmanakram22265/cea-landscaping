@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
   },
   images: {
     // lower-quality tiers used for decorative/large imagery to cut bytes
-    qualities: [60, 65, 70, 75],
+    qualities: [50, 60, 65, 70, 75],
   },
 };
 
