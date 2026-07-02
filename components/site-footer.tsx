@@ -2,7 +2,6 @@ import Image from "next/image";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { business, nav, services } from "@/lib/content";
 import { LeafMark } from "./ui/leaf-mark";
-import { Magnetic } from "./ui/magnetic";
 
 /**
  * Deep evergreen footer: CTA strip over foliage, link columns, and a ghost
@@ -14,7 +13,7 @@ export function SiteFooter() {
       {/* CTA strip */}
       <div className="relative overflow-hidden border-b border-white/10">
         <Image
-          src="/images/gen2/band-foliage.png"
+          src="/images/gen2/band-foliage.webp"
           alt=""
           aria-hidden
           fill
@@ -35,15 +34,13 @@ export function SiteFooter() {
               Ready to make your property the best-kept on the block?
             </h2>
           </div>
-          <Magnetic>
-            <a
-              href="#quote"
-              className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-brand px-7 py-4 text-sm font-semibold text-white shadow-green transition-[background-color] duration-300 hover:bg-brand-600"
-            >
-              Request a Quote
-              <ArrowUpRight className="size-4 transition-transform duration-300 ease-[var(--ease-spring)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </a>
-          </Magnetic>
+          <a
+            href="#quote"
+            className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-brand px-7 py-4 text-sm font-semibold text-white shadow-green transition-[transform,background-color] duration-300 ease-[var(--ease-spring)] hover:-translate-y-0.5 hover:bg-brand-600 active:translate-y-0"
+          >
+            Request a Quote
+            <ArrowUpRight className="size-4 transition-transform duration-300 ease-[var(--ease-spring)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </a>
         </div>
       </div>
 

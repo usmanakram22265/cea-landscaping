@@ -78,7 +78,7 @@ export const services: Service[] = [
       "Hardscape, walkways, and complete transformations",
       "Tree, shrub, and seasonal color programs",
     ],
-    image: "/images/gen2/service-installations.png",
+    image: "/images/gen2/service-installations.webp",
     imageAlt:
       "Fresh sod and a stone paver walkway being installed at an upscale Houston home in warm afternoon light",
   },
@@ -95,7 +95,7 @@ export const services: Service[] = [
       "Inspection and compliance experience for branded sites",
       "Luxury multi-family, distribution, HOAs, office & retail",
     ],
-    image: "/images/gen2/service-maintenance.png",
+    image: "/images/gen2/service-maintenance.webp",
     imageAlt:
       "Striped, freshly mowed lawn and edged flower beds at a luxury apartment community",
   },
@@ -112,7 +112,7 @@ export const services: Service[] = [
       "Certified backflow testing, inspection & repair",
       "Erosion control and seasonal tuning",
     ],
-    image: "/images/gen2/service-irrigation.png",
+    image: "/images/gen2/service-irrigation.webp",
     imageAlt:
       "Sprinkler watering a dense green lawn beside a river-rock drainage swale at golden hour",
   },
@@ -129,7 +129,7 @@ export const services: Service[] = [
       "Rockscape design, decorative stone & gravel beds",
       "Stone edging that sheds water cleanly",
     ],
-    image: "/images/gen2/service-treecare.png",
+    image: "/images/gen2/service-treecare.webp",
     imageAlt:
       "Pruned ornamental tree in a bed of river rock with ornamental grasses at a contemporary Texas home",
   },

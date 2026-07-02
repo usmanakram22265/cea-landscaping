@@ -2,6 +2,7 @@
 
 import { Star } from "lucide-react";
 import { reviews } from "@/lib/content";
+import { Botanical } from "./ui/botanical";
 import { Eyebrow } from "./ui/eyebrow";
 import { Reveal, WordReveal } from "./ui/motion-primitives";
 
@@ -60,7 +61,11 @@ export function Reviews() {
       id="reviews"
       className="relative overflow-hidden bg-mint py-16 sm:py-20"
     >
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+      <Botanical
+        src="/images/gen2/botanical-grass.webp"
+        className="absolute -bottom-20 -left-16 w-[22rem] opacity-60 sm:w-[26rem]"
+      />
+      <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
         <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <div className="max-w-2xl">
             <Reveal>

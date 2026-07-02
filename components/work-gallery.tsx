@@ -3,8 +3,8 @@
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
-import { galleryCategories, galleryImages } from "@/lib/content";
+import { ArrowRight, ChevronLeft, ChevronRight, Phone, X } from "lucide-react";
+import { business, galleryCategories, galleryImages } from "@/lib/content";
 import { Eyebrow } from "./ui/eyebrow";
 import { Reveal, WordReveal } from "./ui/motion-primitives";
 
@@ -145,6 +145,31 @@ export function WorkGallery() {
             </motion.button>
           ))}
         </div>
+
+        {/* proof → action */}
+        <Reveal delay={0.05}>
+          <div className="mt-8 flex flex-col items-center justify-between gap-4 rounded-2xl border border-border bg-bg px-6 py-5 sm:flex-row sm:px-8">
+            <p className="font-display text-lg font-semibold tracking-tight text-ink sm:text-xl">
+              Your property could be next.
+            </p>
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                href="#quote"
+                className="group inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white shadow-green transition-[transform,background-color] duration-300 ease-[var(--ease-spring)] hover:-translate-y-0.5 hover:bg-brand-600 active:translate-y-0"
+              >
+                Request a Quote
+                <ArrowRight className="size-4 transition-transform duration-300 ease-[var(--ease-spring)] group-hover:translate-x-1" />
+              </a>
+              <a
+                href={business.phoneHref}
+                className="inline-flex items-center gap-2 rounded-full border border-border-strong bg-surface px-5 py-3 text-sm font-semibold text-ink transition-[border-color,background-color] duration-300 hover:border-brand/40 hover:bg-mint"
+              >
+                <Phone className="size-4 text-brand" strokeWidth={2.2} />
+                <span className="tabular-nums">{business.phone}</span>
+              </a>
+            </div>
+          </div>
+        </Reveal>
       </div>
 
       {/* lightbox */}

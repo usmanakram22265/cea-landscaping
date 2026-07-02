@@ -11,8 +11,8 @@ import {
 } from "motion/react";
 import { ArrowUpRight, Check } from "lucide-react";
 import { services } from "@/lib/content";
+import { Botanical } from "./ui/botanical";
 import { Eyebrow } from "./ui/eyebrow";
-import { Magnetic } from "./ui/magnetic";
 import { Reveal, WordReveal } from "./ui/motion-primitives";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -38,9 +38,10 @@ export function ServicesIndex() {
     <section
       ref={sectionRef}
       id="services"
-      className="scroll-mt-24 bg-bg py-16 sm:py-20"
+      className="relative scroll-mt-24 overflow-hidden bg-bg py-16 sm:py-20"
     >
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+      <Botanical className="absolute -right-24 -top-20 w-[24rem] rotate-[160deg] opacity-45 sm:w-[30rem]" />
+      <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
         <div className="max-w-2xl">
           <Reveal>
             <Eyebrow>Services</Eyebrow>
@@ -143,15 +144,13 @@ export function ServicesIndex() {
             })}
 
             <Reveal delay={0.1} className="mt-6 px-5">
-              <Magnetic>
-                <a
-                  href="#quote"
-                  className="group inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white shadow-green transition-[background-color] duration-300 hover:bg-brand-600"
-                >
-                  Get a quote for {current.title.toLowerCase()}
-                  <ArrowUpRight className="size-4 transition-transform duration-300 ease-[var(--ease-spring)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </a>
-              </Magnetic>
+              <a
+                href="#quote"
+                className="group inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white shadow-green transition-[transform,background-color] duration-300 ease-[var(--ease-spring)] hover:-translate-y-0.5 hover:bg-brand-600 active:translate-y-0"
+              >
+                Get a quote for {current.title.toLowerCase()}
+                <ArrowUpRight className="size-4 transition-transform duration-300 ease-[var(--ease-spring)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
             </Reveal>
           </div>
 

@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { business, propertyTypes, services, type Service } from "@/lib/content";
 import { submitQuote, type QuoteState } from "@/app/actions";
+import { Botanical } from "./ui/botanical";
 import { Reveal } from "./ui/motion-primitives";
 
 const initialState: QuoteState = { status: "idle" };
@@ -29,14 +30,21 @@ export function QuoteForm() {
   const [state, formAction] = useActionState(submitQuote, initialState);
 
   return (
-    <section id="quote" className="scroll-mt-24 bg-bg py-12 sm:py-16">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+    <section
+      id="quote"
+      className="relative scroll-mt-24 overflow-hidden bg-bg py-12 sm:py-16"
+    >
+      <Botanical
+        src="/images/gen2/botanical-plan.webp"
+        className="absolute -right-24 -top-20 w-[22rem] rotate-[8deg] opacity-45 sm:w-[26rem]"
+      />
+      <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
         <Reveal>
           <div className="grid overflow-hidden rounded-[1.5rem] shadow-float lg:grid-cols-[1fr_1.45fr]">
-            {/* image-led contact panel */}
-            <div className="relative min-h-[24rem] overflow-hidden bg-navy-900 text-white">
+            {/* image-led contact panel — deep evergreen garden */}
+            <div className="relative min-h-[24rem] overflow-hidden bg-evergreen-800 text-white">
               <Image
-                src="/images/gen2/quote-garden.png"
+                src="/images/gen2/quote-garden-green.webp"
                 alt=""
                 aria-hidden
                 fill
@@ -45,7 +53,7 @@ export function QuoteForm() {
               />
               <div
                 aria-hidden
-                className="absolute inset-0 bg-gradient-to-b from-navy-900/90 via-navy-900/35 to-navy-900/80"
+                className="absolute inset-0 bg-gradient-to-b from-evergreen-800/90 via-evergreen-800/25 to-evergreen-800/85"
               />
 
               <div className="relative flex h-full flex-col p-7 sm:p-8">
@@ -145,27 +153,6 @@ export function QuoteForm() {
                         className={fieldClass(state.errors?.name)}
                       />
                     </Field>
-                    <Field label="Phone" error={state.errors?.phone}>
-                      <input
-                        name="phone"
-                        type="tel"
-                        autoComplete="tel"
-                        placeholder="(832) 555-0100"
-                        className={fieldClass(state.errors?.phone)}
-                      />
-                    </Field>
-                  </div>
-
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <Field label="Email" error={state.errors?.email}>
-                      <input
-                        name="email"
-                        type="email"
-                        autoComplete="email"
-                        placeholder="you@company.com"
-                        className={fieldClass(state.errors?.email)}
-                      />
-                    </Field>
                     <Field
                       label="Property type"
                       error={state.errors?.propertyType}
@@ -179,17 +166,56 @@ export function QuoteForm() {
                     </Field>
                   </div>
 
-                  <Field label="Service needed" error={state.errors?.service}>
+                  <div>
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <Field label="Phone" error={state.errors?.phone}>
+                        <input
+                          name="phone"
+                          type="tel"
+                          autoComplete="tel"
+                          placeholder="(832) 555-0100"
+                          className={fieldClass(
+                            state.errors?.phone ?? state.errors?.contact
+                          )}
+                        />
+                      </Field>
+                      <Field label="Email" error={state.errors?.email}>
+                        <input
+                          name="email"
+                          type="email"
+                          autoComplete="email"
+                          placeholder="you@company.com"
+                          className={fieldClass(
+                            state.errors?.email ?? state.errors?.contact
+                          )}
+                        />
+                      </Field>
+                    </div>
+                    {state.errors?.contact ? (
+                      <p className="mt-1.5 text-sm font-medium text-red-600">
+                        {state.errors.contact}
+                      </p>
+                    ) : (
+                      <p className="mt-1.5 text-xs text-faint">
+                        At least one of phone or email.
+                      </p>
+                    )}
+                  </div>
+
+                  <Field
+                    label="Services needed"
+                    error={state.errors?.services}
+                  >
                     <div className="flex flex-wrap gap-2">
                       {services.map((s: Service) => (
                         <label key={s.id} className="cursor-pointer">
                           <input
-                            type="radio"
-                            name="service"
+                            type="checkbox"
+                            name="services"
                             value={s.title}
                             className="peer sr-only"
                           />
-                          <span className="inline-flex items-center rounded-full border border-border-strong bg-bg px-3.5 py-2 text-sm font-medium text-muted transition-[background-color,border-color,color,box-shadow] duration-200 hover:border-brand/50 hover:text-ink peer-checked:border-brand peer-checked:bg-brand peer-checked:text-white peer-checked:shadow-green peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-brand">
+                          <span className="inline-flex items-center rounded-full border border-border-strong bg-bg px-3.5 py-2 text-sm font-medium text-muted transition-[background-color,border-color,color,box-shadow] duration-200 hover:border-ink/40 hover:text-ink peer-checked:border-ink peer-checked:bg-ink peer-checked:text-white peer-checked:shadow-soft peer-checked:hover:border-navy-700 peer-checked:hover:bg-navy-700 peer-checked:hover:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-brand">
                             {s.title}
                           </span>
                         </label>

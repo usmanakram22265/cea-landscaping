@@ -10,7 +10,6 @@ import {
 } from "motion/react";
 import { ArrowRight, Phone } from "lucide-react";
 import { business } from "@/lib/content";
-import { Magnetic } from "./ui/magnetic";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -157,15 +156,13 @@ export function Hero() {
             transition={{ duration: 0.7, ease: EASE, delay: 0.62 }}
             className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
           >
-            <Magnetic className="w-full sm:w-auto">
-              <a
-                href="#quote"
-                className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand px-6 py-3.5 text-sm font-semibold text-white shadow-green transition-[background-color] duration-300 hover:bg-brand-600 sm:w-auto"
-              >
-                Request a Quote
-                <ArrowRight className="size-4 transition-transform duration-300 ease-[var(--ease-spring)] group-hover:translate-x-1" />
-              </a>
-            </Magnetic>
+            <a
+              href="#quote"
+              className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand px-6 py-3.5 text-sm font-semibold text-white shadow-green transition-[background-color] duration-300 hover:bg-brand-600 sm:w-auto"
+            >
+              Request a Quote
+              <ArrowRight className="size-4 transition-transform duration-300 ease-[var(--ease-spring)] group-hover:translate-x-1" />
+            </a>
             <a
               href={business.phoneHref}
               className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-border-strong bg-surface px-6 py-3.5 text-sm font-semibold text-ink transition-[background-color,border-color] duration-300 hover:border-brand/40 hover:bg-green-soft sm:w-auto"

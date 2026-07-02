@@ -26,7 +26,7 @@ export function WhyProof() {
   return (
     <section
       id="why"
-      className="relative scroll-mt-24 overflow-hidden bg-mist py-16 sm:py-20"
+      className="relative scroll-mt-24 overflow-hidden bg-mint py-16 sm:py-20"
     >
       <div aria-hidden className="bg-dotgrid absolute inset-0 opacity-50" />
 
@@ -76,7 +76,7 @@ export function WhyProof() {
           <StaggerItem>
             <article className="group relative flex h-full min-h-[17rem] flex-col justify-end overflow-hidden rounded-[1.5rem] shadow-float">
               <Image
-                src="/images/gen2/tile-fern.png"
+                src="/images/gen2/tile-fern.webp"
                 alt=""
                 aria-hidden
                 fill

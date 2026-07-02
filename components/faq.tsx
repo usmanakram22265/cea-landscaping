@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Phone, Plus } from "lucide-react";
 import { business, faqs } from "@/lib/content";
+import { Botanical } from "./ui/botanical";
 import { Eyebrow } from "./ui/eyebrow";
 import { Reveal, WordReveal } from "./ui/motion-primitives";
 
@@ -18,8 +19,15 @@ export function Faq() {
   const reduce = useReducedMotion();
 
   return (
-    <section id="faq" className="scroll-mt-24 bg-surface py-16 sm:py-20">
-      <div className="mx-auto grid max-w-6xl gap-12 px-5 sm:px-8 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
+    <section
+      id="faq"
+      className="relative scroll-mt-24 overflow-hidden bg-surface py-16 sm:py-20"
+    >
+      <Botanical
+        src="/images/gen2/botanical-seedling.webp"
+        className="absolute -bottom-28 left-4 w-[20rem] opacity-55 sm:w-[24rem]"
+      />
+      <div className="relative mx-auto grid max-w-6xl gap-12 px-5 sm:px-8 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
         <div className="lg:sticky lg:top-28 lg:self-start">
           <Reveal>
             <Eyebrow>FAQ</Eyebrow>

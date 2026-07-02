@@ -12,6 +12,10 @@ export function AreasTicker() {
       aria-label="Service areas across Greater Houston"
       className="grain relative scroll-mt-24 overflow-hidden bg-navy-800 py-8 sm:py-10"
     >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-40 -top-32 size-[34rem] rounded-full bg-brand/14 blur-3xl motion-safe:animate-aurora"
+      />
       <p className="relative mb-5 flex items-center justify-center gap-2 px-5 text-center text-xs font-semibold uppercase tracking-[0.18em] text-sprout">
         <LeafMark className="size-3.5" />
         Chances are, we&rsquo;re already in your neighborhood

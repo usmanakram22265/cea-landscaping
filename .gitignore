@@ -48,3 +48,8 @@ hero-clips/
 
 # local session memory (see memory.md) — not shared/committed
 memory-bank/
+memory.md
+
+# local working files
+Screenshot*.png
+nb-scrolled-sw.png

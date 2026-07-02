@@ -9,7 +9,7 @@ const display = Bricolage_Grotesque({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["500", "600", "700"],
 });
 
 // Body — Geist: precise, modern, neutral. Pairs on a contrast axis with the
