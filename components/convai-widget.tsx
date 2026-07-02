@@ -43,12 +43,13 @@ const theme = {
 // The "Message" button stays: call and text chat sit side by side, and
 // clicking one starts that specific mode.
 const shadowCss = `
-  div:has(button[aria-label="Start a call"]) {
+  div:has(button[aria-label="Start a call"]):not(:has(input, textarea)) {
     background: transparent !important;
     box-shadow: none !important;
     border: none !important;
   }
-  div:has(button[aria-label="Start a call"]) div:has(canvas):not(:has(button)) {
+  div:has(button[aria-label="Start a call"]):not(:has(input, textarea))
+    div:has(canvas):not(:has(button)) {
     display: none !important;
   }
   /* keep the floating buttons legible on any background: white hairline ring
