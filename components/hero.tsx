@@ -29,11 +29,27 @@ export function Hero() {
 
   // Keep the full-quality video off the critical path: the poster paints
   // immediately as the LCP, and the 2.4MB video only starts downloading
-  // after the page load event, fading in once it can play.
+  // after the page load event, fading in once it can play. On connections
+  // too slow to ever stream it (the video needs ~1.5Mbps), stay on the
+  // poster — a crisp still beats a permanently buffering first frame.
   const [mountVideo, setMountVideo] = useState(false);
   const [videoReady, setVideoReady] = useState(false);
   useEffect(() => {
     if (reduce) return;
+    type NetInfo = {
+      saveData?: boolean;
+      effectiveType?: string;
+      downlink?: number;
+    };
+    const conn = (navigator as { connection?: NetInfo }).connection;
+    if (
+      conn &&
+      (conn.saveData ||
+        ["slow-2g", "2g", "3g"].includes(conn.effectiveType ?? "") ||
+        (conn.downlink ?? 10) < 1.5)
+    ) {
+      return;
+    }
     const start = () => setMountVideo(true);
     if (document.readyState === "complete") {
       start();
