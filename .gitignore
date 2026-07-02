@@ -39,3 +39,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# screenshots
+/temp-screenshots
+
+# Raw Higgsfield hero source clips (large; finals live in public/videos)
+hero-clips/
+
+# local session memory (see memory.md) — not shared/committed
+memory-bank/

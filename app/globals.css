@@ -1,26 +1,207 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================
+   CEA Landscaping — Design Tokens (green rebuild)
+   Light · premium · minimal · landscaping-first.
+   Green (#028151, matched to the logo tree) leads; deep evergreen
+   carries dark bands; the logo's navy stays as the anchor for the
+   LOCKED hero overlay, header and footer.
+
+   LOCKED: hero.tsx markup (its navy overlay uses --color-forest;
+   its CTA uses --color-brand, now green). The header keeps its
+   structure with brand-green buttons; the footer is evergreen.
+   ============================================================ */
+
+@theme {
+  /* ---- Primary: brand green (CTAs, links, identity) ---- */
+  --color-brand: #028151;
+  --color-brand-600: #016a41;
+  --color-brand-700: #01502f;
+
+  /* ---- Evergreen (dark section bands) ---- */
+  --color-evergreen: #0b3d28;
+  --color-evergreen-700: #10492f;
+  --color-evergreen-800: #072a1c;
+
+  /* ---- On-dark green accent (labels/icons on evergreen) ---- */
+  --color-sprout: #62cf9c;
+
+  /* ---- Mint tints (chips, soft fills, section washes) ---- */
+  --color-mint: #e2f1ea;
+  --color-mint-soft: #f2f8f5;
+  --color-green-soft: #e2f1ea; /* legacy alias — hero hover tint */
+
+  /* ---- Ink + neutrals (navy-toned, matching the logo wordmark) ---- */
+  --color-ink: #12263d;
+  --color-muted: #4d6072;
+  --color-faint: #7f8fa1;
+
+  /* ---- Surfaces (cool-green off-white light theme) ---- */
+  --color-bg: #f6f9f7;
+  --color-surface: #ffffff;
+  --color-mist: #edf4f0;
+  --color-border: #e3eae5;
+  --color-border-strong: #cbd9d0;
+  --color-ring: #028151;
+
+  /* ---- Amber (stars only) ---- */
+  --color-amber: #e0a52e;
+
+  /* ---- Logo navy (locked hero overlay + header menu scrim) ---- */
+  --color-navy: #102a43;
+  --color-navy-700: #16395c;
+  --color-navy-800: #0c1f33;
+  --color-navy-900: #081726;
+  --color-forest: #102a43;   /* hero video overlay tint */
+  --color-forest-700: #16395c;
+
+  /* ---- Fonts ---- */
+  --font-display: var(--font-display), "Georgia", serif;
+  --font-sans: var(--font-sans), system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, monospace;
+
+  /* ---- Radius ---- */
+  --radius-4xl: 1.75rem;
+
+  /* ---- Easing ---- */
+  --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ---- Named animations ---- */
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-shimmer: shimmer 2.4s linear infinite;
+  --animate-aurora: aurora 18s ease-in-out infinite;
+  --animate-scroll-dot: scroll-dot 2.2s ease-in-out infinite;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* hero scroll cue: dot drifts down inside its pill and fades */
+@keyframes scroll-dot {
+  0% { transform: translateY(0); opacity: 0; }
+  25% { opacity: 1; }
+  75% { transform: translateY(0.9rem); opacity: 0.2; }
+  100% { transform: translateY(0.9rem); opacity: 0; }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to { background-position: 200% 0; }
+}
+
+/* Slow drifting radial glow for dark evergreen bands */
+@keyframes aurora {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.55; }
+  50% { transform: translate3d(4%, -3%, 0) scale(1.08); opacity: 0.8; }
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    line-height: 1.7;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-brand) 22%, transparent);
+    color: var(--color-brand-700);
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    line-height: 1.04;
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ============================================================
+   Utilities
+   ============================================================ */
+
+@layer utilities {
+  /* Layered navy-tinted shadows — never flat shadow-md */
+  .shadow-soft {
+    box-shadow:
+      0 1px 2px -1px rgba(18, 38, 61, 0.08),
+      0 10px 28px -14px rgba(18, 38, 61, 0.18);
+  }
+  .shadow-float {
+    box-shadow:
+      0 2px 4px -2px rgba(18, 38, 61, 0.10),
+      0 18px 44px -18px rgba(18, 38, 61, 0.22),
+      0 44px 88px -44px rgba(18, 38, 61, 0.18);
+  }
+  .shadow-green {
+    box-shadow:
+      0 2px 8px -2px rgba(2, 129, 81, 0.30),
+      0 16px 36px -14px rgba(2, 129, 81, 0.34);
+  }
+  /* Fine grain texture for depth on dark bands */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.35;
+    mix-blend-mode: soft-light;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Faint dot grid for light bands */
+  .bg-dotgrid {
+    background-image: radial-gradient(rgba(18, 38, 61, 0.06) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+
+  .rule {
+    background-color: var(--color-border);
+    height: 1px;
+  }
+  .rounded-inherit { border-radius: inherit; }
+
+  /* edge fade mask for marquees */
+  .mask-edge-x {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+  }
 }
