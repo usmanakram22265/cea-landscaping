@@ -27,7 +27,13 @@ const mono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://cealandscaping.com"),
+  // Resolve social/OG URLs against the deployed domain: the Vercel production
+  // URL until the custom domain (cealandscaping.com) goes live.
+  metadataBase: new URL(
+    process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : "https://cealandscaping.com"
+  ),
   title: {
     default: "CEA Landscaping & Maintenance | Houston Commercial Landscaping",
     template: "%s | CEA Landscaping & Maintenance",
@@ -48,6 +54,21 @@ export const metadata: Metadata = {
       "Custom outdoor spaces built for beauty, function, and long-term durability in the Texas climate.",
     type: "website",
     locale: "en_US",
+    images: [
+      {
+        url: "/videos/hero-poster.jpg",
+        width: 1280,
+        height: 720,
+        alt: "Manicured commercial landscaping at a modern Houston property",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CEA Landscaping & Maintenance",
+    description:
+      "Custom outdoor spaces built for beauty, function, and long-term durability in the Texas climate.",
+    images: ["/videos/hero-poster.jpg"],
   },
 };
 
