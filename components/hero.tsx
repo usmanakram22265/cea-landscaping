@@ -41,8 +41,13 @@ export function Hero() {
       effectiveType?: string;
       downlink?: number;
     };
+    // navigator.connection reflects the machine's general internet estimate,
+    // not the path to this origin — a local server is always fast, so the
+    // slow-connection gate only applies to real (remote) visitors.
+    const isLocal = ["localhost", "127.0.0.1"].includes(location.hostname);
     const conn = (navigator as { connection?: NetInfo }).connection;
     if (
+      !isLocal &&
       conn &&
       (conn.saveData ||
         ["slow-2g", "2g", "3g"].includes(conn.effectiveType ?? "") ||
